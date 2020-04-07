@@ -1,6 +1,7 @@
 import React, { useState, ReactChild, useEffect } from 'react';
-import { auth, firebase, keySession } from '@src/services/firebase/auth';
+import { auth, firebase } from '@src/services/firebase/auth';
 import { User } from 'firebase';
+import { useRouter } from 'next/router'
 
 enum AuthStatus {
   'GUEST' = 'GUEST',
@@ -23,6 +24,7 @@ const AuthContext = React.createContext<State | undefined>(undefined);
 const AuthContextProvider = ({ children }: Props) => {
   const [authStatus, setAuthStatus] = useState<AuthStatus>(AuthStatus.GUEST);
   const [userData, setUserData] = useState<User | null>(null);
+  const router = useRouter();
 
   useEffect(() => {
     const unlisten = auth.onAuthStateChanged((authUser) => {
@@ -51,6 +53,7 @@ const AuthContextProvider = ({ children }: Props) => {
           .then((result) => {
             setUserData(result?.user);
             setAuthStatus(AuthStatus.LOGGED_IN);
+            router.replace('/');
           })
           .catch((e) => console.error(e.message));
       });
@@ -60,6 +63,7 @@ const AuthContextProvider = ({ children }: Props) => {
     await auth.signOut();
     setAuthStatus(AuthStatus.GUEST);
     setUserData(null);
+    await router.replace('/');
   };
 
   return (

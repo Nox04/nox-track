@@ -6,5 +6,4 @@ if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
 }
 const auth = firebase.auth();
-const keySession = `firebase:authUser:${firebaseConfig.apiKey}:[DEFAULT]`;
-export { auth, firebase, keySession };
+export { auth, firebase };
