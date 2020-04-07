@@ -24,6 +24,7 @@ class MyDocument extends Document {
             href="https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap"
             rel="stylesheet"
           />
+          <link href='https://css.gg/c?=|heart|track|trophy' rel='stylesheet' />
         </Head>
         <body className="bg-gray-900">
           <Main />

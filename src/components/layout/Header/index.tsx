@@ -14,14 +14,14 @@ const Header: React.FC = () => {
             </a>
           </Link>
         </div>
-        <ul className="flex items-center justify-between">
+        <ul className="flex items-center justify-between uppercase cursor-pointer">
           <Link href={userData ? '/profile' : '/login'}>
-            <li className="px-4 uppercase hover:bg-gray-900 p-4 h-full leading-10 cursor-pointer">
+            <li className="p-4 hover:bg-gray-900 leading-10 h-full">
               <a>{userData ? 'Profile' : 'Login'}</a>
             </li>
           </Link>
           <Link href="/about">
-            <li className="px-4 uppercase hover:bg-gray-900 p-4 h-full leading-10 cursor-pointer">
+            <li className="p-4 hover:bg-gray-900 leading-10 h-full">
               <a>About</a>
             </li>
           </Link>
