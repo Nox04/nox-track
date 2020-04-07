@@ -2,6 +2,7 @@ import React from 'react';
 import ParentApp from 'next/app';
 import '@src/css/tailwind.css';
 import Head from 'next/head';
+import { AuthContextProvider } from '@src/contexts/AuthContext';
 
 class MyApp extends ParentApp {
   render() {
@@ -11,7 +12,9 @@ class MyApp extends ParentApp {
         <Head>
           <title>{process.env.SITE_NAME}</title>
         </Head>
-        <Component {...pageProps} />
+        <AuthContextProvider>
+          <Component {...pageProps} />
+        </AuthContextProvider>
       </>
     );
   }

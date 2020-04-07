@@ -1,7 +1,9 @@
 import React from 'react';
 import Link from 'next/link';
+import { useAuthContext } from '@src/contexts/AuthContext';
 
 const Header: React.FC = () => {
+  const { userData } = useAuthContext();
   return (
     <header className="w-screen flex bg-gray-800">
       <nav className="w-full flex justify-between">
@@ -13,9 +15,9 @@ const Header: React.FC = () => {
           </Link>
         </div>
         <ul className="flex items-center justify-between">
-          <Link href="/login">
+          <Link href={userData ? '/profile' : '/login'}>
             <li className="px-4 uppercase hover:bg-gray-900 p-4 h-full leading-10 cursor-pointer">
-              <a>Login</a>
+              <a>{userData ? 'Profile' : 'Login'}</a>
             </li>
           </Link>
           <Link href="/about">
