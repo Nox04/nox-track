@@ -46,10 +46,10 @@ exports[`Index Page renders correctly 1`] = `
     </header>
     <main>
       <h1
-        class="text-xl m-4 text-center"
+        class="text-xl text-center m-4"
         data-testid="helloH1"
       >
-        Home
+        Login
       </h1>
     </main>
   </div>

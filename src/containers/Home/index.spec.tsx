@@ -11,7 +11,7 @@ describe('Index Page', () => {
 
   it('renders hello', () => {
     // Given
-    const EXPECTED = `Hello from ${process.env.SITE_NAME}.`;
+    const EXPECTED = `Home`;
 
     const { getByTestId } = render(<Index />);
 
@@ -24,7 +24,7 @@ describe('Index Page', () => {
 
   it('renders hello with tailwind classes', () => {
     // Given
-    const EXPECTED = 'text-xl text-gray-900';
+    const EXPECTED = 'text-xl m-4 text-center';
     const { getByTestId } = render(<Index />);
 
     // When

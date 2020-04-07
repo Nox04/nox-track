@@ -7,7 +7,9 @@ const Header: React.FC = () => {
       <nav className="w-full flex justify-between">
         <div className="p-4">
           <Link href="/">
-            <a className="text-2xl uppercase">Nox Tracking</a>
+            <a className="text-2xl uppercase">
+              <img src="/title.png" alt="logo" />
+            </a>
           </Link>
         </div>
         <ul className="flex items-center justify-between">
