@@ -37,7 +37,7 @@ const Header: React.FC = () => {
   };
 
   return (
-    <header className="w-screen flex flex-col bg-gray-800">
+    <header className="w-screen flex flex-col bg-gray-800 text-white">
       <nav className="w-full flex justify-between">
         <div className="p-4">
           <Link href="/">
