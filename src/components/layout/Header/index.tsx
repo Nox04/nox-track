@@ -1,11 +1,43 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import { useAuthContext } from '@src/contexts/AuthContext';
 
+enum MenuState {
+  COLLAPSED = 'COLLAPSED',
+  EXPANDED = 'EXPANDED',
+}
+
 const Header: React.FC = () => {
   const { userData } = useAuthContext();
+  const [state, setState] = useState<MenuState>(MenuState.COLLAPSED);
+
+  const MenuItems = () => {
+    return (
+      <>
+        <Link href={userData ? '/profile' : '/login'}>
+          <li className="p-4 hover:bg-gray-700 leading-10 h-full w-full">
+            <a>{userData ? 'Profile' : 'Login'}</a>
+          </li>
+        </Link>
+        <Link href="/about">
+          <li className="p-4 hover:bg-gray-700 leading-10 h-full w-full">
+            <a>About</a>
+          </li>
+        </Link>
+      </>
+    );
+  };
+
+  const switchMenu = () => {
+    if (state === MenuState.EXPANDED) {
+      setState(MenuState.COLLAPSED);
+    } else if (state === MenuState.COLLAPSED) {
+      setState(MenuState.EXPANDED);
+    }
+  };
+
   return (
-    <header className="w-screen flex bg-gray-800">
+    <header className="w-screen flex flex-col bg-gray-800">
       <nav className="w-full flex justify-between">
         <div className="p-4">
           <Link href="/">
@@ -15,7 +47,10 @@ const Header: React.FC = () => {
           </Link>
         </div>
         <div className="block md:hidden mt-5 mr-4">
-          <button className="flex items-center px-3 py-2 border rounded text-purple-300 border-purple-400 hover:text-white hover:border-white">
+          <button
+            className="flex items-center px-3 py-2 border rounded text-purple-300 border-purple-400 hover:text-white hover:border-white"
+            onClick={switchMenu}
+          >
             <svg
               className="fill-current h-3 w-3"
               viewBox="0 0 20 20"
@@ -27,18 +62,16 @@ const Header: React.FC = () => {
           </button>
         </div>
         <ul className="hidden md:flex items-center justify-between uppercase cursor-pointer">
-          <Link href={userData ? '/profile' : '/login'}>
-            <li className="p-4 hover:bg-gray-900 leading-10 h-full">
-              <a>{userData ? 'Profile' : 'Login'}</a>
-            </li>
-          </Link>
-          <Link href="/about">
-            <li className="p-4 hover:bg-gray-900 leading-10 h-full">
-              <a>About</a>
-            </li>
-          </Link>
+          <MenuItems />
         </ul>
       </nav>
+      <ul
+        className={`${
+          state === MenuState.EXPANDED ? 'flex' : 'hidden'
+        } flex-col md:hidden items-center justify-between uppercase cursor-pointer`}
+      >
+        <MenuItems />
+      </ul>
     </header>
   );
 };
