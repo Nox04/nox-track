@@ -5,7 +5,7 @@ const Layout: React.FC = (props) => {
   return (
     <div className="m-0 flex flex-col w-screen">
       <Header />
-      <main>{props.children}</main>
+      <main className="container mx-auto">{props.children}</main>
     </div>
   );
 };

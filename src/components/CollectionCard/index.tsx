@@ -1,10 +1,10 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBook, faFilm, faGamepad, faDumbbell } from '@fortawesome/free-solid-svg-icons';
+import { faBook, faFilm, faDragon, faDumbbell } from '@fortawesome/free-solid-svg-icons';
 
 const CollectionCard: React.FC = () => {
   return (
-    <div className="my-1 p-4 w-full sm:w-1/2 md:w-1/3 lg:w-1/4 lg:my-4 xl:w-1/6">
+    <div className="my-1 p-4 w-full sm:w-1/2 md:w-1/3 lg:w-1/4 lg:my-4 xl:w-1/5">
       <article className="overflow-hidden rounded-lg shadow-lg bg-purple-900">
         <a href="#">
           <img
@@ -21,15 +21,24 @@ const CollectionCard: React.FC = () => {
             Stephen King
           </a>
         </header>
-        <footer className="flex items-center leading-none p-2 md:p-4">
+        <footer className="flex items-center leading-none p-2 lg:p-4">
           <div className="flex flex-1 justify-around">
-            <FontAwesomeIcon icon={faBook} className="text-blue-400" />
-            <FontAwesomeIcon icon={faFilm} className="text-orange-400" />
-            <FontAwesomeIcon icon={faGamepad} className="text-red-400" />
-          </div>
-          <div className="flex flex-1 justify-center">
-            <FontAwesomeIcon icon={faDumbbell} className="text-white" />
-            <span className="text-center text-white pl-2">89</span>
+            <span>
+              <FontAwesomeIcon icon={faBook} className="text-blue-400" />
+              <span className="text-center text-white pl-2">102</span>
+            </span>
+            <span>
+              <FontAwesomeIcon icon={faFilm} className="text-orange-400" />
+              <span className="text-center text-white pl-2">23</span>
+            </span>
+            <span>
+              <FontAwesomeIcon icon={faDragon} className="text-red-400" />
+              <span className="text-center text-white pl-2">11</span>
+            </span>
+            <span>
+              <FontAwesomeIcon icon={faDumbbell} className="text-yellow-400" />
+              <span className="text-center text-white pl-2">890</span>
+            </span>
           </div>
         </footer>
       </article>
