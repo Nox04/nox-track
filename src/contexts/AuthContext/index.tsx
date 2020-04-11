@@ -35,7 +35,7 @@ const AuthContextProvider = ({ children }: Props) => {
   }, []);
 
   const signInWithGoogle = () => {
-    router.replace('https://noxtracking.xyz/api/auth/login/');
+    router.replace('//noxtracking.xyz/api/auth/login/');
   };
 
   const redirect = (success: boolean) => {
