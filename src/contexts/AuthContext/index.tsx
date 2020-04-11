@@ -38,35 +38,28 @@ const AuthContextProvider = ({ children }: Props) => {
     router.replace('//noxtracking.xyz/api/auth/login/');
   };
 
-  const redirect = (success: boolean) => {
-    router.replace(success ? '/' : '/login');
-  };
-
-  const checkSession = () => {
-    fetch('https://noxtracking.xyz/api/auth' + router.asPath)
-      .then((response) => {
-        response.json().then((result) => {
-          if (result?.access_token) {
-            setUserData(result.access_token);
-            setAuthStatus(AuthStatus.LOGGED_IN);
-            saveSessionValues(result.access_token);
-            redirect(true);
-          } else {
-            redirect(false);
-          }
-        });
-      })
-      .catch((error) => {
-        console.log(error);
-        redirect(false);
-      });
+  const checkSession = async () => {
+    try {
+      const response = await fetch('https://noxtracking.xyz/api/auth' + router.asPath);
+      const result = await response.json();
+      if (result?.access_token) {
+        setUserData(result.access_token);
+        setAuthStatus(AuthStatus.LOGGED_IN);
+        saveSessionValues(result.access_token);
+        router.replace('/');
+      } else {
+        router.replace('/login');
+      }
+    } catch (e) {
+      router.replace('/login');
+    }
   };
 
   const signOut = async () => {
     clearSession();
     setAuthStatus(AuthStatus.GUEST);
     setUserData(null);
-    await redirect(true);
+    await router.replace('/');
   };
 
   return (
