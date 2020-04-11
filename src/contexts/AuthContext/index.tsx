@@ -1,6 +1,6 @@
-import React, { useState, ReactChild } from 'react';
+import React, { useState, ReactChild, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { clearSession, saveSessionValues } from '@src/services/auth';
+import { clearSession, getSessionValues, saveSessionValues } from '@src/services/auth';
 
 enum AuthStatus {
   'GUEST' = 'GUEST',
@@ -26,6 +26,14 @@ const AuthContextProvider = ({ children }: Props) => {
   const [userData, setUserData] = useState<any | null>(null);
   const router = useRouter();
 
+  useEffect(() => {
+    const token = getSessionValues();
+    if (token) {
+      setUserData(token);
+      setAuthStatus(AuthStatus.LOGGED_IN);
+    }
+  }, []);
+
   const signInWithGoogle = () => {
     window.location.href = 'https://noxtracking.xyz/api/auth/login/';
   };
@@ -48,7 +56,7 @@ const AuthContextProvider = ({ children }: Props) => {
           }
         });
       })
-      .then((error) => {
+      .catch((error) => {
         console.log(error);
         redirect(false);
       });
