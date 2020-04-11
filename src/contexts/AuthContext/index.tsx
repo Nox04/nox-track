@@ -1,6 +1,6 @@
 import React, { useState, ReactChild, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { clearSession, getSessionValues, saveSessionValues } from '@src/services/auth';
+import {clearSession, getSessionValues, saveSessionValues, verifySessionOnServer} from '@src/services/auth';
 
 enum AuthStatus {
   'GUEST' = 'GUEST',
@@ -40,12 +40,11 @@ const AuthContextProvider = ({ children }: Props) => {
 
   const checkSession = async () => {
     try {
-      const response = await fetch('https://noxtracking.xyz/api/auth' + router.asPath);
-      const result = await response.json();
-      if (result?.access_token) {
-        setUserData(result.access_token);
+      const token = await verifySessionOnServer(router.asPath);
+      if (token) {
+        setUserData(token);
         setAuthStatus(AuthStatus.LOGGED_IN);
-        saveSessionValues(result.access_token);
+        saveSessionValues(token);
         router.replace('/');
       } else {
         router.replace('/login');
