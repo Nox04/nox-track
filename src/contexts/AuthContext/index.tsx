@@ -35,7 +35,7 @@ const AuthContextProvider = ({ children }: Props) => {
   }, []);
 
   const signInWithGoogle = () => {
-    window.location.href = 'https://noxtracking.xyz/api/auth/login/';
+    router.replace('https://noxtracking.xyz/api/auth/login/');
   };
 
   const redirect = (success: boolean) => {
@@ -50,16 +50,14 @@ const AuthContextProvider = ({ children }: Props) => {
             setUserData(result.access_token);
             setAuthStatus(AuthStatus.LOGGED_IN);
             saveSessionValues(result.access_token);
-            console.log('Llego la data');
             redirect(true);
           } else {
-            console.log('Llego sin data');
             redirect(false);
           }
         });
       })
       .catch((error) => {
-        console.log('algo paso');
+        console.log(error);
         redirect(false);
       });
   };

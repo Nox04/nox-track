@@ -1,16 +1,13 @@
 import React, { useEffect } from 'react';
-import { useRouter } from 'next/router';
 import Layout from '@src/components/layout';
 import { useAuthContext } from '@src/contexts/AuthContext';
 
 const Callback: React.FC = () => {
-  const router = useRouter();
   const { checkSession } = useAuthContext();
 
   useEffect(() => {
-    console.log('Checkeo resul;t');
     checkSession();
-  }, [router.asPath]);
+  }, [checkSession]);
 
   return (
     <Layout>
