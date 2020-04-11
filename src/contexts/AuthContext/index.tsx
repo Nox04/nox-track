@@ -50,14 +50,16 @@ const AuthContextProvider = ({ children }: Props) => {
             setUserData(result.access_token);
             setAuthStatus(AuthStatus.LOGGED_IN);
             saveSessionValues(result.access_token);
+            console.log('Llego la data');
             redirect(true);
           } else {
+            console.log('Llego sin data');
             redirect(false);
           }
         });
       })
       .catch((error) => {
-        console.log(error);
+        console.log('algo paso');
         redirect(false);
       });
   };
@@ -66,7 +68,7 @@ const AuthContextProvider = ({ children }: Props) => {
     clearSession();
     setAuthStatus(AuthStatus.GUEST);
     setUserData(null);
-    await redirect(false);
+    await redirect(true);
   };
 
   return (
