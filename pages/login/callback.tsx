@@ -8,6 +8,7 @@ const Callback: React.FC = () => {
   const { checkSession } = useAuthContext();
 
   useEffect(() => {
+    console.log('Checkeo resul;t');
     checkSession();
   }, [router]);
 
