@@ -13,20 +13,6 @@ const Home: React.FC = () => {
         />
         <div className="flex flex-wrap -mx-1 lg:-mx-4">
           <CollectionCard />
-          <CollectionCard />
-          <CollectionCard />
-          <CollectionCard />
-          <CollectionCard />
-          <CollectionCard />
-          <CollectionCard />
-          <CollectionCard />
-          <CollectionCard />
-          <CollectionCard />
-          <CollectionCard />
-          <CollectionCard />
-          <CollectionCard />
-          <CollectionCard />
-          <CollectionCard />
         </div>
         <div className="flex w-auto text-white justify-center">
           <ul className="flex max-w-xl h-10 rounded items-center">
