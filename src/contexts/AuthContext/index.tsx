@@ -1,5 +1,6 @@
 import React, { useState, ReactChild } from 'react';
 import { useRouter } from 'next/router';
+import { clearSession, saveSessionValues } from '@src/services/auth';
 
 enum AuthStatus {
   'GUEST' = 'GUEST',
@@ -11,6 +12,7 @@ interface State {
   userData: any | null;
   signOut: () => void;
   signInWithGoogle: () => void;
+  checkSession: () => void;
 }
 
 interface Props {
@@ -28,10 +30,35 @@ const AuthContextProvider = ({ children }: Props) => {
     window.location.href = 'https://noxtracking.xyz/api/auth/login/';
   };
 
+  const redirect = (success: boolean) => {
+    router.replace(success ? '/' : '/login');
+  };
+
+  const checkSession = () => {
+    fetch('https://noxtracking.xyz/api/auth' + router.asPath)
+      .then((response) => {
+        response.json().then((result) => {
+          if (result?.access_token) {
+            setUserData(result.access_token);
+            setAuthStatus(AuthStatus.LOGGED_IN);
+            saveSessionValues(result.access_token);
+            redirect(true);
+          } else {
+            redirect(false);
+          }
+        });
+      })
+      .then((error) => {
+        console.log(error);
+        redirect(false);
+      });
+  };
+
   const signOut = async () => {
+    clearSession();
     setAuthStatus(AuthStatus.GUEST);
     setUserData(null);
-    await router.replace('/');
+    await redirect(false);
   };
 
   return (
@@ -41,6 +68,7 @@ const AuthContextProvider = ({ children }: Props) => {
         userData,
         signOut,
         signInWithGoogle,
+        checkSession,
       }}
     >
       {children}
