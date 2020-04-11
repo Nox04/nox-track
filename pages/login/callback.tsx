@@ -10,7 +10,7 @@ const Callback: React.FC = () => {
   useEffect(() => {
     console.log('Checkeo resul;t');
     checkSession();
-  }, [router]);
+  }, [router.asPath]);
 
   return (
     <Layout>
