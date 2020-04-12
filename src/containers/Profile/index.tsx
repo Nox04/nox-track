@@ -1,9 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Layout from '@src/components/layout';
-import { useAuthContext } from '@src/contexts/AuthContext';
+import { AuthStatus, useAuthContext } from '@src/contexts/AuthContext';
 
 const Login: React.FC = () => {
-  const { signOut } = useAuthContext();
+  const { signOut, authStatus, redirectToLogin } = useAuthContext();
+  useEffect(() => {
+    if (authStatus === AuthStatus.GUEST) {
+      redirectToLogin();
+    }
+  }, [authStatus]);
   return (
     <Layout>
       <button className="text-xl text-center m-4" onClick={signOut}>

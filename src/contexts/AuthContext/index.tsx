@@ -1,8 +1,13 @@
 import React, { useState, ReactChild, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import {clearSession, getSessionValues, saveSessionValues, verifySessionOnServer} from '@src/services/auth';
+import {
+  clearSession,
+  getSessionValues,
+  saveSessionValues,
+  verifySessionOnServer,
+} from '@src/services/auth';
 
-enum AuthStatus {
+export enum AuthStatus {
   'GUEST' = 'GUEST',
   'LOGGED_IN' = 'LOGGED_IN',
 }
@@ -12,6 +17,8 @@ interface State {
   userData: any | null;
   signOut: () => void;
   signInWithGoogle: () => void;
+  redirectToLogin: () => void;
+  redirectToProfile: () => void;
   checkSession: () => void;
 }
 
@@ -33,6 +40,14 @@ const AuthContextProvider = ({ children }: Props) => {
       setAuthStatus(AuthStatus.LOGGED_IN);
     }
   }, []);
+
+  const redirectToLogin = () => {
+    router.push('/login');
+  };
+
+  const redirectToProfile = () => {
+    router.push('/profile');
+  };
 
   const signInWithGoogle = () => {
     router.replace('//noxtracking.xyz/api/auth/login/');
@@ -69,6 +84,8 @@ const AuthContextProvider = ({ children }: Props) => {
         signOut,
         signInWithGoogle,
         checkSession,
+        redirectToLogin,
+        redirectToProfile,
       }}
     >
       {children}
