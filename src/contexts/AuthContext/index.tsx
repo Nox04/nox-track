@@ -71,9 +71,9 @@ const AuthContextProvider = ({ children }: Props) => {
 
   const signOut = async () => {
     clearSession();
-    setAuthStatus(AuthStatus.GUEST);
-    setUserData(null);
     await router.replace('/');
+    setUserData(null);
+    setAuthStatus(AuthStatus.GUEST);
   };
 
   return (
