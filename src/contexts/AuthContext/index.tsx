@@ -1,9 +1,9 @@
 import React, { useState, ReactChild, useEffect } from 'react';
-import { auth, firebase } from '@src/services/firebase/auth';
+import { auth, firebase } from '@src/services/firebase/firebase';
 import { User } from 'firebase';
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/router';
 
-enum AuthStatus {
+export enum AuthStatus {
   'GUEST' = 'GUEST',
   'LOGGED_IN' = 'LOGGED_IN',
 }
@@ -61,9 +61,9 @@ const AuthContextProvider = ({ children }: Props) => {
 
   const signOut = async () => {
     await auth.signOut();
+    await router.replace('/');
     setAuthStatus(AuthStatus.GUEST);
     setUserData(null);
-    await router.replace('/');
   };
 
   return (

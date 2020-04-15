@@ -2,7 +2,11 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBook, faFilm, faDragon, faDumbbell } from '@fortawesome/free-solid-svg-icons';
 
-const CollectionCard: React.FC = () => {
+interface CollectionCardProps {
+  name: string | undefined;
+}
+
+const CollectionCard: React.FC<CollectionCardProps> = (props) => {
   return (
     <div className="my-1 p-4 w-full sm:w-1/2 md:w-1/3 lg:w-1/4 lg:my-4 xl:w-1/5">
       <article className="overflow-hidden rounded-lg shadow-lg bg-purple-900">
@@ -18,7 +22,7 @@ const CollectionCard: React.FC = () => {
             className="text-center w-full no-underline hover:underline text-white font-bold"
             href="#"
           >
-            Stephen King
+            {props?.name}
           </a>
         </header>
         <footer className="flex items-center leading-none p-2 lg:p-4">

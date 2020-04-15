@@ -19,6 +19,7 @@ module.exports = {
           maxWidth: '100%',
           '@screen xl': {
             maxWidth: '1600px',
+            width: '100%',
           },
         },
       });
