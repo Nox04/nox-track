@@ -12,6 +12,7 @@ const Login: React.FC = () => {
       router.push('/login');
     }
   }, [authStatus, router]);
+
   return (
     <Layout>
       <button className="text-xl text-center m-4" onClick={signOut}>

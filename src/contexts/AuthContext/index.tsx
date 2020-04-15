@@ -10,9 +10,12 @@ export enum AuthStatus {
 
 interface State {
   authStatus: AuthStatus;
-  userData: User | null;
+  userData: any | null;
   signOut: () => void;
   signInWithGoogle: () => void;
+  redirectToLogin: () => void;
+  redirectToProfile: () => void;
+  checkSession: () => void;
 }
 
 interface Props {
@@ -23,40 +26,43 @@ const AuthContext = React.createContext<State | undefined>(undefined);
 
 const AuthContextProvider = ({ children }: Props) => {
   const [authStatus, setAuthStatus] = useState<AuthStatus>(AuthStatus.GUEST);
-  const [userData, setUserData] = useState<User | null>(null);
+  const [userData, setUserData] = useState<any | null>(null);
   const router = useRouter();
 
   useEffect(() => {
-    const unlisten = auth.onAuthStateChanged((authUser) => {
-      if (authUser) {
-        setUserData(authUser);
-        setAuthStatus(AuthStatus.LOGGED_IN);
-      } else {
-        setAuthStatus(AuthStatus.GUEST);
-        setUserData(null);
-      }
-    });
-    return () => {
-      unlisten();
-    };
-  });
+    const token = getSessionValues();
+    if (token) {
+      setUserData(token);
+      setAuthStatus(AuthStatus.LOGGED_IN);
+    }
+  }, []);
+
+  const redirectToLogin = () => {
+    router.push('/login');
+  };
+
+  const redirectToProfile = () => {
+    router.push('/profile');
+  };
 
   const signInWithGoogle = () => {
-    const provider = new firebase.auth.GoogleAuthProvider();
-    firebase
-      .auth()
-      .setPersistence(firebase.auth.Auth.Persistence.LOCAL)
-      .then(() => {
-        firebase
-          .auth()
-          .signInWithPopup(provider)
-          .then((result) => {
-            setUserData(result?.user);
-            setAuthStatus(AuthStatus.LOGGED_IN);
-            router.replace('/');
-          })
-          .catch((e) => console.error(e.message));
-      });
+    router.replace('//noxtracking.xyz/api/auth/login/');
+  };
+
+  const checkSession = async () => {
+    try {
+      const token = await verifySessionOnServer(router.asPath);
+      if (token) {
+        setUserData(token);
+        setAuthStatus(AuthStatus.LOGGED_IN);
+        saveSessionValues(token);
+        router.replace('/');
+      } else {
+        router.replace('/login');
+      }
+    } catch (e) {
+      router.replace('/login');
+    }
   };
 
   const signOut = async () => {
@@ -73,6 +79,9 @@ const AuthContextProvider = ({ children }: Props) => {
         userData,
         signOut,
         signInWithGoogle,
+        checkSession,
+        redirectToLogin,
+        redirectToProfile,
       }}
     >
       {children}

@@ -38,6 +38,7 @@ const Home: React.FC = () => {
           onChange={searchInputHandler}
         />
         <div className="flex flex-wrap -mx-1 lg:-mx-4">
+
           {filteredCollections?.map((collection) => {
             return <CollectionCard key={collection.id} name={collection.name} />;
           })}
