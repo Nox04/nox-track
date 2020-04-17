@@ -1,15 +1,14 @@
 import React from 'react';
 import Layout from '@src/components/layout';
+import { useRouter } from 'next/router';
 
-interface CollectionProps {
-  slug: string | string[];
-}
-
-const Collection: React.FC<CollectionProps> = (props: CollectionProps) => {
+const Collection: React.FC = () => {
+  const router = useRouter();
+  const { slug } = router.query;
   return (
     <Layout>
       <h1 data-testid="helloH1" className="text-xl text-center m-4">
-        {props.slug}
+        {slug}
       </h1>
     </Layout>
   );
