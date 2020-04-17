@@ -39,7 +39,7 @@ const Home: React.FC = () => {
         />
         <div className="flex flex-wrap -mx-1 lg:-mx-4">
           {filteredCollections?.map((collection) => {
-            return <CollectionCard key={collection.id} name={collection.name} />;
+            return <CollectionCard key={collection.id} collection={collection} />;
           })}
         </div>
         {/*<div className="flex w-auto text-white justify-center">*/}

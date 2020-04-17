@@ -3,6 +3,8 @@ import { db } from '@src/services/firebase/firebase';
 export interface Collection {
   id: string;
   name?: string;
+  imageUrl?: string;
+  slug?: string;
 }
 
 export const getAllCollections = async () => {
