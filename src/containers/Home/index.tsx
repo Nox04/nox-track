@@ -36,6 +36,7 @@ const Home: React.FC = () => {
           className="bg-gray-800 w-full text-white text-2xl p-2 md:p-4 rounded-lg"
           placeholder="What collections do you want to track..."
           onChange={searchInputHandler}
+          aria-label="Search bar"
         />
         <div className="flex flex-wrap -mx-1 lg:-mx-4">
           {filteredCollections?.map((collection) => {

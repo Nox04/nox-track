@@ -14,14 +14,14 @@ const Header: React.FC = () => {
   const MenuItems = () => {
     return (
       <>
-        <Link href={userData ? '/profile' : '/login'}>
+        <Link href={userData ? '/profile' : '/login'} as={userData ? '/profile' : '/login'}>
           <li className="p-4 hover:bg-gray-700 leading-10 h-full w-full">
-            <a>{userData ? 'Profile' : 'Login'}</a>
+            <a href={userData ? '/profile' : '/login'}>{userData ? 'Profile' : 'Login'}</a>
           </li>
         </Link>
-        <Link href="/about">
+        <Link href="/about" as="/about">
           <li className="p-4 hover:bg-gray-700 leading-10 h-full w-full">
-            <a>About</a>
+            <a href="/about">About</a>
           </li>
         </Link>
       </>

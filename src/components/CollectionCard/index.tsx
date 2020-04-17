@@ -47,10 +47,6 @@ const CollectionCard: React.FC<CollectionCardProps> = (props) => {
               <span className="text-center text-white pl-2">{props?.collection.moviesCount}</span>
             </span>
             <span>
-              <FontAwesomeIcon icon={faDragon} className="text-red-400" />
-              <span className="text-center text-white pl-2">{props?.collection.seriesCount}</span>
-            </span>
-            <span>
               <FontAwesomeIcon icon={faClock} className="text-yellow-400" />
               <span className="text-center text-white pl-2">{props?.collection.hoursCount}</span>
             </span>
