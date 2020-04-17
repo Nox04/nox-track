@@ -14,15 +14,23 @@ const CollectionCard: React.FC<CollectionCardProps> = (props) => {
   return (
     <div className="my-1 p-4 w-full sm:w-1/2 md:w-1/3 lg:w-1/4 lg:my-4 xl:w-1/5">
       <article className="overflow-hidden rounded-lg shadow-lg bg-purple-900 w-full">
-        <div
-          className="bg-center bg-cover bg-no-repeat"
-          style={{
-            backgroundImage: `url(${props?.collection.imageUrl})`,
-            height: width > 768 ? 350 : 420,
-          }}
-        />
+        <Link
+          href={`/collection/${props?.collection.slug}`}
+          as={`/collection/${props?.collection.slug}`}
+        >
+          <a
+            className="bg-center bg-cover bg-no-repeat w-full inline-block"
+            style={{
+              backgroundImage: `url(${props?.collection.imageUrl})`,
+              height: width > 768 ? 350 : 420,
+            }}
+          />
+        </Link>
         <header className="flex items-center justify-between p-2 md:p-4 uppercase">
-          <Link href={`/collection/${props?.collection.slug}`}>
+          <Link
+            href={`/collection/${props?.collection.slug}`}
+            as={`/collection/${props?.collection.slug}`}
+          >
             <a className="text-center w-full no-underline hover:underline text-white font-bold">
               {props?.collection.name}
             </a>
