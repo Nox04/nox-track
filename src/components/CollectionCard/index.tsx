@@ -36,26 +36,26 @@ const CollectionCard: React.FC<CollectionCardProps> = (props) => {
             </a>
           </Link>
         </header>
-        {/*<footer className="flex items-center leading-none p-2 lg:p-4">*/}
-        {/*  <div className="flex flex-1 justify-around">*/}
-        {/*    <span>*/}
-        {/*      <FontAwesomeIcon icon={faBook} className="text-blue-400" />*/}
-        {/*      <span className="text-center text-white pl-2">102</span>*/}
-        {/*    </span>*/}
-        {/*    <span>*/}
-        {/*      <FontAwesomeIcon icon={faFilm} className="text-orange-400" />*/}
-        {/*      <span className="text-center text-white pl-2">23</span>*/}
-        {/*    </span>*/}
-        {/*    <span>*/}
-        {/*      <FontAwesomeIcon icon={faDragon} className="text-red-400" />*/}
-        {/*      <span className="text-center text-white pl-2">11</span>*/}
-        {/*    </span>*/}
-        {/*    <span>*/}
-        {/*      <FontAwesomeIcon icon={faDumbbell} className="text-yellow-400" />*/}
-        {/*      <span className="text-center text-white pl-2">890</span>*/}
-        {/*    </span>*/}
-        {/*  </div>*/}
-        {/*</footer>*/}
+        <footer className="flex items-center leading-none p-2 lg:p-4">
+          <div className="flex flex-1 justify-around">
+            <span>
+              <FontAwesomeIcon icon={faBook} className="text-blue-400" />
+              <span className="text-center text-white pl-2">{props?.collection.booksCount}</span>
+            </span>
+            <span>
+              <FontAwesomeIcon icon={faFilm} className="text-orange-400" />
+              <span className="text-center text-white pl-2">{props?.collection.moviesCount}</span>
+            </span>
+            <span>
+              <FontAwesomeIcon icon={faDragon} className="text-red-400" />
+              <span className="text-center text-white pl-2">{props?.collection.seriesCount}</span>
+            </span>
+            <span>
+              <FontAwesomeIcon icon={faDumbbell} className="text-yellow-400" />
+              <span className="text-center text-white pl-2">{props?.collection.effort}</span>
+            </span>
+          </div>
+        </footer>
       </article>
     </div>
   );

@@ -5,6 +5,10 @@ export interface Collection {
   name?: string;
   imageUrl?: string;
   slug?: string;
+  booksCount?: number;
+  moviesCount?: number;
+  seriesCount?: number;
+  effort?: number;
 }
 
 export const getAllCollections = async () => {
