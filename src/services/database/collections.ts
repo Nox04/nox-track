@@ -8,12 +8,12 @@ export interface Collection {
   booksCount?: number;
   moviesCount?: number;
   seriesCount?: number;
-  effort?: number;
+  hoursCount?: number;
 }
 
 export const getAllCollections = async () => {
   const data = await db.collection('collections').limit(20).get();
-  return data.docs.map((doc) => {
+  return data.docs.reverse().map((doc) => {
     return {
       id: doc.id,
       ...doc.data(),

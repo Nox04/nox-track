@@ -1,6 +1,6 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBook, faFilm, faDragon, faDumbbell } from '@fortawesome/free-solid-svg-icons';
+import { faBook, faFilm, faDragon, faClock } from '@fortawesome/free-solid-svg-icons';
 import { Collection } from '@src/services/database/collections';
 import Link from 'next/link';
 import useWindowWidth from '@src/hooks/useWindowWidth';
@@ -51,8 +51,8 @@ const CollectionCard: React.FC<CollectionCardProps> = (props) => {
               <span className="text-center text-white pl-2">{props?.collection.seriesCount}</span>
             </span>
             <span>
-              <FontAwesomeIcon icon={faDumbbell} className="text-yellow-400" />
-              <span className="text-center text-white pl-2">{props?.collection.effort}</span>
+              <FontAwesomeIcon icon={faClock} className="text-yellow-400" />
+              <span className="text-center text-white pl-2">{props?.collection.hoursCount}</span>
             </span>
           </div>
         </footer>
