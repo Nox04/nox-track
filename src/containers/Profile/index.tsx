@@ -25,7 +25,7 @@ const Profile: React.FC = () => {
       <div className="rounded-lg m-6 p-4 bg-gray-700 md:flex">
         <img
           src={userData?.picture}
-          alt="Your profile picture"
+          alt="Avatar"
           className="h-32 w-32 rounded-full mx-auto md:mx-1"
         />
         <div className="text-white text-center p-6 md:text-left">
