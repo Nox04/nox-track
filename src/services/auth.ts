@@ -11,18 +11,21 @@ export const saveSessionValue = (session: string | string[]) => {
   saveLocalValue(SESSION_KEY, session);
 };
 
-export function validToken(token: string) {
-  const jwtInfo: any = decodeJwt(token);
+export function validToken(token: string | string[]) {
+  if (typeof token === 'string' && token.length > 0) {
+    try {
+      const jwtInfo: any = decodeJwt(token);
+      if (jwtInfo.exp) {
+        const now = Date.now();
+        const expires = jwtInfo.exp * 1000;
 
-  if (jwtInfo.exp) {
-    const now = Date.now();
-    const expires = jwtInfo.exp * 1000;
-
-    if (expires < now) {
+        return expires >= now;
+      }
+    } catch (e) {
       return false;
     }
   }
-  return true;
+  return false;
 }
 
 export const hasValidSession = () => {

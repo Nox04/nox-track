@@ -1,9 +1,6 @@
 import React from 'react';
 import { NextPage } from 'next';
-
-const FailurePage: React.FC = () => {
-  return <>You didnt</>;
-};
+import FailurePage from '@src/containers/LoginFailure';
 
 const Failure: NextPage = () => <FailurePage />;
 
