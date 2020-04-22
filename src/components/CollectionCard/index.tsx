@@ -1,12 +1,11 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBook, faFilm, faDragon, faClock } from '@fortawesome/free-solid-svg-icons';
-import { Collection } from '@src/services/database/collections';
+import { faBook, faFilm, faClock } from '@fortawesome/free-solid-svg-icons';
 import Link from 'next/link';
 import useWindowWidth from '@src/hooks/useWindowWidth';
 
 interface CollectionCardProps {
-  collection: Collection;
+  collection: any;
 }
 
 const CollectionCard: React.FC<CollectionCardProps> = (props) => {
