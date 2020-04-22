@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { useAuthContext } from '@src/contexts/AuthContext';
+import { AuthStatus, useAuthContext } from '@src/contexts/AuthContext';
 
 enum MenuState {
   COLLAPSED = 'COLLAPSED',
@@ -8,15 +8,20 @@ enum MenuState {
 }
 
 const Header: React.FC = () => {
-  const { userData } = useAuthContext();
+  const { authStatus } = useAuthContext();
   const [state, setState] = useState<MenuState>(MenuState.COLLAPSED);
 
   const MenuItems = () => {
     return (
       <>
-        <Link href={userData ? '/profile' : '/login'} as={userData ? '/profile' : '/login'}>
+        <Link
+          href={authStatus === AuthStatus.LOGGED_IN ? '/profile' : '/login'}
+          as={authStatus === AuthStatus.LOGGED_IN ? '/profile' : '/login'}
+        >
           <li className="p-4 hover:bg-gray-700 leading-10 h-full w-full">
-            <a href={userData ? '/profile' : '/login'}>{userData ? 'Profile' : 'Login'}</a>
+            <a href={authStatus === AuthStatus.LOGGED_IN ? '/profile' : '/login'}>
+              {authStatus === AuthStatus.LOGGED_IN ? 'Profile' : 'Login'}
+            </a>
           </li>
         </Link>
         <Link href="/about" as="/about">

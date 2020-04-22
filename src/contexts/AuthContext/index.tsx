@@ -1,5 +1,7 @@
 import React, { useState, ReactChild, useEffect } from 'react';
 import { useRouter } from 'next/router';
+import { BACKEND_URL } from '@src/shared/constants';
+import { clearSession, hasValidSession, saveSessionValue } from '@src/services/auth';
 
 export enum AuthStatus {
   'GUEST' = 'GUEST',
@@ -8,8 +10,8 @@ export enum AuthStatus {
 
 interface State {
   authStatus: AuthStatus;
-  userData: any | null;
   signOut: () => void;
+  signIn: (token: string | string[]) => void;
   signInWithGoogle: () => void;
 }
 
@@ -21,25 +23,35 @@ const AuthContext = React.createContext<State | undefined>(undefined);
 
 const AuthContextProvider = ({ children }: Props) => {
   const [authStatus, setAuthStatus] = useState<AuthStatus>(AuthStatus.GUEST);
-  const [userData, setUserData] = useState<any | null>(null);
   const router = useRouter();
 
+  useEffect(() => {
+    const validSession = hasValidSession();
+    setAuthStatus(validSession ? AuthStatus.LOGGED_IN : AuthStatus.GUEST);
+  }, []);
+
   const signInWithGoogle = () => {
-    router.replace('//localhost:3000/auth/google');
+    router.replace(`${BACKEND_URL}/auth/google`);
   };
 
   const signOut = async () => {
     await router.replace('/');
     setAuthStatus(AuthStatus.GUEST);
-    setUserData(null);
+    clearSession();
+  };
+
+  const signIn = async (token: string | string[]) => {
+    await router.replace('/');
+    setAuthStatus(AuthStatus.LOGGED_IN);
+    saveSessionValue(token);
   };
 
   return (
     <AuthContext.Provider
       value={{
         authStatus,
-        userData,
         signOut,
+        signIn,
         signInWithGoogle,
       }}
     >

@@ -2,6 +2,7 @@ require('dotenv').config();
 
 const ENV_VARS = {
   SITE_NAME: process.env.SITE_NAME,
+  BACKEND_URL: process.env.BACKEND_URL,
 };
 
 module.exports = {
@@ -15,6 +16,8 @@ module.exports = {
       '/login': { page: '/login' },
       '/profile': { page: '/profile' },
       '/collections': { page: '/index' },
+      '/login/success': { page: '/login/success' },
+      '/login/failure': { page: '/login/failure' },
     };
     // const collections = await getAllCollections();
     // collections.map((collection) => {
