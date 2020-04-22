@@ -1,7 +1,7 @@
 import React, { useState, ReactChild, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { BACKEND_URL } from '@src/shared/constants';
-import { clearSession, hasValidSession, saveSessionValue } from '@src/services/auth';
+import { clearSession, hasValidSession, saveSessionValue } from '@src/services/auth.service';
 
 export enum AuthStatus {
   'GUEST' = 'GUEST',

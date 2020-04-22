@@ -1,4 +1,4 @@
-import { clearLocalValue, getLocalValue, saveLocalValue } from '@src/services/local-store';
+import { clearLocalValue, getLocalValue, saveLocalValue } from '@src/services/local-store.service';
 import decodeJwt from 'jwt-decode';
 
 const SESSION_KEY = '_session';

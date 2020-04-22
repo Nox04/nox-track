@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Layout from '@src/components/layout';
 import { AuthStatus, useAuthContext } from '@src/contexts/AuthContext';
-import { validToken } from '@src/services/auth';
+import { validToken } from '@src/services/auth.service';
 
 const SuccessPage: React.FC = () => {
   const router = useRouter();
