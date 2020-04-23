@@ -8,7 +8,7 @@ const Collection: React.FC = () => {
   return (
     <Layout>
       <h1 data-testid="helloH1" className="text-xl text-center m-4">
-        {slug}
+        Slug: {slug}
       </h1>
     </Layout>
   );
