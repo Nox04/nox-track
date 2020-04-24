@@ -11,11 +11,10 @@ const getPieces = (collection: Collection): Piece[] => {
 
   pieces = collection.pieces;
 
-  collection.collections?.forEach((nestedCollection) => {
-    nestedCollection.pieces.forEach((piece) => {
-      pieces.push(piece);
+  collection.collections?.forEach((recursiveCollection) => {
+    getPieces(recursiveCollection)?.forEach((recursivePiece) => {
+      pieces.push(recursivePiece);
     });
-    getPieces(nestedCollection);
   });
 
   return pieces;
@@ -25,9 +24,15 @@ const PieceCollection: React.FC<PieceCollectionProps> = ({ collection }: PieceCo
   const pieces: Piece[] = getPieces(collection);
   return (
     <div className="rounded-lg my-6 mx-auto p-4 bg-gray-700 md:flex text-white w-full lg:w-11/12 xl:w-3/4">
-      {pieces.map((piece) => {
-        return <PieceCard piece={piece} key={piece.id} />;
-      })}
+      <ul>
+        {pieces.map((piece) => {
+          return (
+            <li key={piece.id}>
+              <PieceCard piece={piece} />
+            </li>
+          );
+        })}
+      </ul>
     </div>
   );
 };
