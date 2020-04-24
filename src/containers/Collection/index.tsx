@@ -3,6 +3,7 @@ import Layout from '@src/components/layout';
 import { useRouter } from 'next/router';
 import { getCollectionBySlug } from '@src/services/collection.service';
 import { Collection } from '@src/types';
+import CollectionHeader from '@src/components/CollectionSection/Header';
 
 const CollectionComponent: React.FC = () => {
   const router = useRouter();
@@ -21,9 +22,11 @@ const CollectionComponent: React.FC = () => {
 
   return (
     <Layout>
-      <h1 data-testid="helloH1" className="text-xl text-center m-4 text-white">
-        {collection?.name}
-      </h1>
+      {collection && (
+        <>
+          <CollectionHeader collection={collection} />
+        </>
+      )}
     </Layout>
   );
 };
