@@ -48,7 +48,9 @@ const CollectionCard: React.FC<CollectionCardProps> = (props) => {
             </span>
             <span>
               <FontAwesomeIcon icon={faClock} className="text-yellow-400" />
-              <span className="text-center text-white pl-2">{props?.collection.minutes}</span>
+              <span className="text-center text-white pl-2">
+                {(props?.collection.minutes / 60).toFixed(1)}
+              </span>
             </span>
           </div>
         </footer>
