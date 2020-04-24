@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import { getCollectionBySlug } from '@src/services/collection.service';
 import { Collection } from '@src/types';
 import CollectionHeader from '@src/components/CollectionSection/Header';
+import PieceCollection from '@src/components/CollectionSection/PieceCollection';
 
 const CollectionComponent: React.FC = () => {
   const router = useRouter();
@@ -25,6 +26,7 @@ const CollectionComponent: React.FC = () => {
       {collection && (
         <>
           <CollectionHeader collection={collection} />
+          <PieceCollection collection={collection} />
         </>
       )}
     </Layout>

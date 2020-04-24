@@ -10,7 +10,7 @@ const CollectionHeader: React.FC<CollectionHeaderProps> = ({
 }: CollectionHeaderProps) => {
   const width = useWindowWidth();
   return (
-    <div className="rounded-lg m-6 p-4 bg-gray-700 md:flex text-white">
+    <div className="rounded-lg my-6 mx-auto p-4 bg-gray-700 md:flex text-white w-full lg:w-11/12 xl:w-3/4">
       <div
         className="bg-center bg-cover bg-no-repeat inline-block p-4"
         style={{
