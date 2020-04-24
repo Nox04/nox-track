@@ -23,7 +23,7 @@ const SuccessPage: React.FC = () => {
 
   return (
     <Layout>
-      <h1 className="text-white text-center">Redirecting...</h1>
+      <h1 className="text-white text-center m-8">Redirecting...</h1>
     </Layout>
   );
 };

@@ -2,9 +2,10 @@ import React, { useEffect } from 'react';
 import Layout from '@src/components/layout';
 import { AuthStatus, useAuthContext } from '@src/contexts/AuthContext';
 import { useRouter } from 'next/router';
+import GoogleButton from '@src/components/GoogleButton';
 
 const FailurePage: React.FC = () => {
-  const { signInWithGoogle, authStatus } = useAuthContext();
+  const { authStatus } = useAuthContext();
   const router = useRouter();
 
   useEffect(() => {
@@ -14,10 +15,8 @@ const FailurePage: React.FC = () => {
   }, [authStatus, router]);
   return (
     <Layout>
-      <h1 className="text-white text-center">Login failed</h1>
-      <button data-testid="helloH1" className="text-xl text-center m-4" onClick={signInWithGoogle}>
-        Try Again
-      </button>
+      <h1 className="text-white text-center m-8">Login failed</h1>
+      <GoogleButton />
     </Layout>
   );
 };
