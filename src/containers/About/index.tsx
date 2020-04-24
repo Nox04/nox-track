@@ -5,7 +5,7 @@ const About: React.FC = () => {
   return (
     <Layout>
       <div className="text-white flex justify-center">
-        <h4 data-testid="helloH1" className="text-xl text-center m-4 w-2/3">
+        <h4 data-testid="helloH1" className="text-xl text-center m-4 w-full md:w-2/3">
           Noxtracking is a project to helping people to track their collections progress. It was
           originated by my personal frustration trying to find an application which allowed me to
           track my progress reading Stephen King books. I hope you enjoy it. You can make

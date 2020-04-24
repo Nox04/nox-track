@@ -36,7 +36,7 @@ const CollectionCard: React.FC<CollectionCardProps> = (props) => {
             </a>
           </Link>
         </header>
-        <footer className="flex items-center leading-none p-2 lg:p-4">
+        <footer className="flex items-center leading-none pb-4 pt-2">
           <div className="flex flex-1 justify-around">
             <span>
               <FontAwesomeIcon icon={faBook} className="text-blue-400" />
