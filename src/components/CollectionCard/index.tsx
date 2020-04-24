@@ -3,9 +3,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBook, faFilm, faClock } from '@fortawesome/free-solid-svg-icons';
 import Link from 'next/link';
 import useWindowWidth from '@src/hooks/useWindowWidth';
+import { Collection } from '@src/types';
 
 interface CollectionCardProps {
-  collection: any;
+  collection: Collection;
 }
 
 const CollectionCard: React.FC<CollectionCardProps> = (props) => {
@@ -20,7 +21,7 @@ const CollectionCard: React.FC<CollectionCardProps> = (props) => {
           <a
             className="bg-center bg-cover bg-no-repeat w-full inline-block"
             style={{
-              backgroundImage: `url(${props?.collection.imageUrl})`,
+              backgroundImage: `url(${props?.collection.picture})`,
               height: width > 768 ? 350 : 420,
             }}
           />
@@ -47,7 +48,7 @@ const CollectionCard: React.FC<CollectionCardProps> = (props) => {
             </span>
             <span>
               <FontAwesomeIcon icon={faClock} className="text-yellow-400" />
-              <span className="text-center text-white pl-2">{props?.collection.hoursCount}</span>
+              <span className="text-center text-white pl-2">{props?.collection.minutes}</span>
             </span>
           </div>
         </footer>

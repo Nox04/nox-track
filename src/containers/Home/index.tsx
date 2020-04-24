@@ -1,27 +1,29 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import Layout from '@src/components/layout';
 import CollectionCard from '@src/components/CollectionCard';
+import { getAllCollections } from '@src/services/collection.service';
+import { Collection } from '@src/types';
 
 const Home: React.FC = () => {
-  // const [collections, setCollections] = useState<Collection[]>();
-  // const [filteredCollections, setFilteredCollections] = useState<Collection[]>();
+  const [collections, setCollections] = useState<Collection[]>();
+  const [filteredCollections, setFilteredCollections] = useState<Collection[]>();
   const [query, setQuery] = useState<string>();
 
-  // useEffect(() => {
-  //   const getData = async () => {
-  //     const rawCollections = await getAllCollections();
-  //     setCollections(rawCollections);
-  //     setFilteredCollections(rawCollections);
-  //   };
-  //   getData();
-  // }, []);
+  useEffect(() => {
+    const getData = async () => {
+      const rawCollections = await getAllCollections();
+      setCollections(rawCollections);
+      setFilteredCollections(rawCollections);
+    };
+    getData();
+  }, []);
 
-  // useEffect(() => {
-  //   const filtered = collections?.filter((collection) => {
-  //     return query ? collection.name?.toLowerCase().indexOf(query.toLowerCase()) !== -1 : true;
-  //   });
-  //   setFilteredCollections(filtered);
-  // }, [query, collections]);
+  useEffect(() => {
+    const filtered = collections?.filter((collection) => {
+      return query ? collection.name?.toLowerCase().indexOf(query.toLowerCase()) !== -1 : true;
+    });
+    setFilteredCollections(filtered);
+  }, [query, collections]);
 
   const searchInputHandler = (event: ChangeEvent<HTMLInputElement>) => {
     setQuery(event.target.value);
@@ -38,9 +40,9 @@ const Home: React.FC = () => {
           aria-label="Search bar"
         />
         <div className="flex flex-wrap -mx-1 lg:-mx-4">
-          {/*{filteredCollections?.map((collection) => {*/}
-          {/*  return <CollectionCard key={collection.id} collection={collection} />;*/}
-          {/*})}*/}
+          {filteredCollections?.map((collection) => {
+            return <CollectionCard key={collection.id} collection={collection} />;
+          })}
         </div>
         {/*<div className="flex w-auto text-white justify-center">*/}
         {/*  <ul className="flex max-w-xl h-10 rounded items-center">*/}
