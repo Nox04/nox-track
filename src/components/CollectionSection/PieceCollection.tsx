@@ -24,15 +24,9 @@ const PieceCollection: React.FC<PieceCollectionProps> = ({ collection }: PieceCo
   const pieces: Piece[] = getPieces(collection);
   return (
     <div className="rounded-lg my-6 mx-6 lg:mx-auto p-4 bg-gray-700 md:flex text-white lg:w-11/12 xl:w-3/4">
-      <ul>
-        {pieces.map((piece) => {
-          return (
-            <li key={piece.id}>
-              <PieceCard piece={piece} />
-            </li>
-          );
-        })}
-      </ul>
+      {pieces.map((piece) => {
+        return <PieceCard piece={piece} key={piece.id} />;
+      })}
     </div>
   );
 };
