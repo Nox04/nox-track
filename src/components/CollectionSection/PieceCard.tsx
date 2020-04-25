@@ -25,7 +25,7 @@ const PieceCard: React.FC<PieceCardProps> = ({ piece }: PieceCardProps) => {
         </Link>
         <header className="flex items-center justify-between p-2 md:p-4 uppercase">
           <Link href={`/piece/${piece.slug}`} as={`/piece/${piece.slug}`}>
-            <a className="text-center w-full no-underline hover:underline text-white font-bold">
+            <a className="text-center w-full no-underline hover:underline text-white font-bold truncate">
               {piece.name}
             </a>
           </Link>
