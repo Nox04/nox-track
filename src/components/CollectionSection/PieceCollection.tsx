@@ -23,7 +23,7 @@ const getPieces = (collection: Collection): Piece[] => {
 const PieceCollection: React.FC<PieceCollectionProps> = ({ collection }: PieceCollectionProps) => {
   const pieces: Piece[] = getPieces(collection);
   return (
-    <div className="rounded-lg my-6 mx-auto p-4 bg-gray-700 md:flex text-white w-full lg:w-11/12 xl:w-3/4">
+    <div className="rounded-lg my-6 mx-6 lg:mx-auto p-4 bg-gray-700 md:flex text-white lg:w-11/12 xl:w-3/4">
       <ul>
         {pieces.map((piece) => {
           return (
