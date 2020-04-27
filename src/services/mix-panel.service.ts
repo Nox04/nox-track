@@ -5,7 +5,7 @@ import { User } from '@src/types';
 const isProd = ENVIRONMENT === 'production';
 
 export const initMP = () => {
-  mixpanel.init(MIX_PANEL_ID);
+  if (isProd) mixpanel.init(MIX_PANEL_ID);
 };
 
 const actions = {

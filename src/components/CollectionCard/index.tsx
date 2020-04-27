@@ -21,6 +21,7 @@ const CollectionCard: React.FC<CollectionCardProps> = ({ collection }: Collectio
               backgroundImage: `url(${collection.picture})`,
               height: width > 768 ? 350 : 420,
             }}
+            aria-label={collection.name}
           />
         </Link>
         <header className="flex items-center justify-between p-2 md:p-4 uppercase">
