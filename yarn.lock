@@ -1304,11 +1304,6 @@
   resolved "https://registry.yarnpkg.com/@types/jwt-decode/-/jwt-decode-2.2.1.tgz#afdf5c527fcfccbd4009b5fd02d1e18241f2d2f2"
   integrity sha512-aWw2YTtAdT7CskFyxEX2K21/zSDStuf/ikI3yBqmwpwJF0pS+/IX5DWv+1UFffZIbruP6cnT9/LAJV1gFwAT1A==
 
-"@types/mixpanel-browser@^2.35.0":
-  version "2.35.0"
-  resolved "https://registry.yarnpkg.com/@types/mixpanel-browser/-/mixpanel-browser-2.35.0.tgz#d2261889d5ab00f469c489b44261c8667ae2147a"
-  integrity sha512-u6PdePlidgkUPSP3YUZhna4WJLAcx2t4mCYWPzbradr0HfVz0g8En85uQntDX4PJgoFQTvmMiRGMNkm8I9KzUg==
-
 "@types/next@^9.0.0":
   version "9.0.0"
   resolved "https://registry.yarnpkg.com/@types/next/-/next-9.0.0.tgz#29aca06f8a5cfffc974a83b87e52ca57b2a506c4"
@@ -7934,11 +7929,6 @@ react-is@^16.12.0, react-is@^16.8.1:
   version "16.13.1"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
   integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
-
-react-mixpanel@^1.0.5:
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/react-mixpanel/-/react-mixpanel-1.0.5.tgz#38c0078577dddd6ac01fbaa8a638d6b291f76446"
-  integrity sha512-2ZLXO01ZEVGSIHN62OrsBQ5zmuKV9QUNJy5jeCOmKEhZUcxT49hOd5dbSB+W8epjMS/eBcw9RsPk8TJlPadwhQ==
 
 react-timeago@^4.4.0:
   version "4.4.0"
