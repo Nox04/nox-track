@@ -14,7 +14,7 @@ const CollectionCard: React.FC<CollectionCardProps> = ({ collection }: Collectio
   return (
     <div className="my-1 p-4 w-full sm:w-1/2 md:w-1/3 lg:w-1/4 lg:my-4 xl:w-1/5">
       <article className="overflow-hidden rounded-lg shadow-lg bg-purple-900 w-full">
-        <Link href={`/collection/${collection.slug}`} as={`/collection/${collection.slug}`}>
+        <Link href={`/collection/[slug]`} as={`/collection/${collection.slug}`}>
           <a
             className="bg-center bg-cover bg-no-repeat w-full inline-block"
             style={{
@@ -25,7 +25,7 @@ const CollectionCard: React.FC<CollectionCardProps> = ({ collection }: Collectio
           />
         </Link>
         <header className="flex items-center justify-between p-2 md:p-4 uppercase">
-          <Link href={`/collection/${collection.slug}`} as={`/collection/${collection.slug}`}>
+          <Link href={`/collection/[slug]`} as={`/collection/${collection.slug}`}>
             <a className="text-center w-full no-underline hover:underline text-white font-bold">
               {collection.name}
             </a>
