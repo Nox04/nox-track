@@ -26,7 +26,7 @@ const Profile: React.FC = () => {
           <h4 className="text-lg font-bold">{userData?.name}</h4>
           <h4>{userData?.email}</h4>
           <h4>
-            Member since: <TimeAgo date={userData.createdTime} />
+            Member since: <TimeAgo date={userData?.createdTime} />
           </h4>
         </div>
       </div>
