@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import Layout from '@src/components/layout';
 import { useRouter } from 'next/router';
-import { getCollectionBySlug } from '@src/services/collection.service';
 import { Piece } from '@src/types';
 import PieceHeader from '@src/components/PieceSection/Header';
+import { getPieceBySlug } from '@src/services/piece.service';
 
 const CollectionComponent: React.FC = () => {
   const router = useRouter();
@@ -13,7 +13,7 @@ const CollectionComponent: React.FC = () => {
   useEffect(() => {
     const getData = async () => {
       if (typeof slug === 'string') {
-        const collection = await getCollectionBySlug(slug);
+        const collection = await getPieceBySlug(slug);
         setCollection(collection);
       }
     };
