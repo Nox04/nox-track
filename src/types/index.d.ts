@@ -1,6 +1,13 @@
+import { Dict } from 'mixpanel-browser';
+
 export enum PieceType {
   BOOK = 'book',
   MOVIE = 'movie',
+}
+export interface User extends Dict {
+  email: string;
+  name: string;
+  picture: string;
 }
 
 export interface Collection extends BaseEntity {

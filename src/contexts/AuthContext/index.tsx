@@ -2,6 +2,9 @@ import React, { useState, ReactChild, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { BACKEND_URL } from '@src/shared/constants';
 import { clearSession, hasValidSession, saveSessionValue } from '@src/services/auth.service';
+import { getUserData } from '@src/services/user.service';
+import { Mixpanel } from '@src/services/mix-panel.service';
+import { User } from '@src/types';
 
 export enum AuthStatus {
   'GUEST' = 'GUEST',
@@ -10,6 +13,7 @@ export enum AuthStatus {
 
 interface State {
   authStatus: AuthStatus;
+  userData: any;
   signOut: () => void;
   signIn: (token: string | string[]) => void;
   signInWithGoogle: () => void;
@@ -23,12 +27,28 @@ const AuthContext = React.createContext<State | undefined>(undefined);
 
 const AuthContextProvider = ({ children }: Props) => {
   const [authStatus, setAuthStatus] = useState<AuthStatus>(AuthStatus.GUEST);
+  const [userData, setUserData] = useState<User>();
   const router = useRouter();
 
   useEffect(() => {
+    const getUser = async () => {
+      setUserData(await getUserData());
+    };
+
     const validSession = hasValidSession();
     setAuthStatus(validSession ? AuthStatus.LOGGED_IN : AuthStatus.GUEST);
+
+    if (validSession) {
+      getUser();
+    }
   }, []);
+
+  useEffect(() => {
+    if (userData?.id) {
+      Mixpanel.identify(userData.id);
+      Mixpanel.people.set(userData);
+    }
+  }, [userData]);
 
   const signInWithGoogle = () => {
     router.replace(`${BACKEND_URL}/auth/google`);
@@ -38,18 +58,21 @@ const AuthContextProvider = ({ children }: Props) => {
     await router.replace('/');
     setAuthStatus(AuthStatus.GUEST);
     clearSession();
+    Mixpanel.reset();
   };
 
   const signIn = async (token: string | string[]) => {
-    await router.replace('/');
-    setAuthStatus(AuthStatus.LOGGED_IN);
     saveSessionValue(token);
+    await router.replace('/');
+    setUserData(await getUserData());
+    setAuthStatus(AuthStatus.LOGGED_IN);
   };
 
   return (
     <AuthContext.Provider
       value={{
         authStatus,
+        userData,
         signOut,
         signIn,
         signInWithGoogle,
