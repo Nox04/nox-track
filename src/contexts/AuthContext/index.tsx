@@ -58,6 +58,7 @@ const AuthContextProvider = ({ children }: Props) => {
     await router.replace('/');
     setAuthStatus(AuthStatus.GUEST);
     clearSession();
+    Mixpanel.track('Logged out');
     Mixpanel.reset();
   };
 
@@ -65,6 +66,7 @@ const AuthContextProvider = ({ children }: Props) => {
     saveSessionValue(token);
     await router.replace('/');
     setUserData(await getUserData());
+    Mixpanel.track('Logged in');
     setAuthStatus(AuthStatus.LOGGED_IN);
   };
 

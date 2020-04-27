@@ -15,7 +15,7 @@ const actions = {
   reset: () => {
     if (isProd) mixpanel.reset();
   },
-  track: (event: string, props: Dict) => {
+  track: (event: string, props?: Dict) => {
     if (isProd) mixpanel.track(name, props);
   },
   people: {
