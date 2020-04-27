@@ -3,7 +3,6 @@ import { useRouter } from 'next/router';
 import { BACKEND_URL } from '@src/shared/constants';
 import { clearSession, hasValidSession, saveSessionValue } from '@src/services/auth.service';
 import { getUserData } from '@src/services/user.service';
-import { Mixpanel } from '@src/services/mix-panel.service';
 import { User } from '@src/types';
 
 export enum AuthStatus {
@@ -43,13 +42,6 @@ const AuthContextProvider = ({ children }: Props) => {
     }
   }, []);
 
-  useEffect(() => {
-    if (userData?.id) {
-      Mixpanel.identify(userData.id);
-      Mixpanel.people.set(userData);
-    }
-  }, [userData]);
-
   const signInWithGoogle = () => {
     router.replace(`${BACKEND_URL}/auth/google`);
   };
@@ -58,15 +50,12 @@ const AuthContextProvider = ({ children }: Props) => {
     await router.replace('/');
     setAuthStatus(AuthStatus.GUEST);
     clearSession();
-    Mixpanel.track('Logged out');
-    Mixpanel.reset();
   };
 
   const signIn = async (token: string | string[]) => {
     saveSessionValue(token);
     await router.replace('/');
     setUserData(await getUserData());
-    Mixpanel.track('Logged in');
     setAuthStatus(AuthStatus.LOGGED_IN);
   };
 
