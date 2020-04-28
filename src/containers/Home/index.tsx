@@ -1,25 +1,22 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import Layout from '@src/components/layout';
 import CollectionCard from '@src/components/CollectionCard';
-import { getAllCollections } from '@src/services/collection.service';
 import { Collection } from '@src/types';
+import useSWR from 'swr';
+import { APIService } from '@src/services/api.service';
+import Loading from '@src/components/Loading';
 
 const Home: React.FC = () => {
-  const [collections, setCollections] = useState<Collection[]>();
   const [filteredCollections, setFilteredCollections] = useState<Collection[]>();
   const [query, setQuery] = useState<string>();
+  const { data: collections, error } = useSWR('/collection', APIService.getData);
 
   useEffect(() => {
-    const getData = async () => {
-      const rawCollections = await getAllCollections();
-      setCollections(rawCollections);
-      setFilteredCollections(rawCollections);
-    };
-    getData();
-  }, []);
+    setFilteredCollections(collections);
+  }, [collections]);
 
   useEffect(() => {
-    const filtered = collections?.filter((collection) => {
+    const filtered = collections?.filter((collection: any) => {
       return query ? collection.name?.toLowerCase().indexOf(query.toLowerCase()) !== -1 : true;
     });
     setFilteredCollections(filtered);
@@ -39,6 +36,7 @@ const Home: React.FC = () => {
           onChange={searchInputHandler}
           aria-label="Search bar"
         />
+        {!collections && <Loading />}
         <div className="flex flex-wrap -mx-1 lg:-mx-4">
           {filteredCollections?.map((collection) => {
             return <CollectionCard key={collection.id} collection={collection} />;

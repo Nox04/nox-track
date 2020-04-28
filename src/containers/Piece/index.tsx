@@ -1,30 +1,22 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Layout from '@src/components/layout';
 import { useRouter } from 'next/router';
-import { Piece } from '@src/types';
 import PieceHeader from '@src/components/PieceSection/Header';
-import { getPieceBySlug } from '@src/services/piece.service';
+import useSWR from 'swr';
+import { APIService } from '@src/services/api.service';
+import Loading from '@src/components/Loading';
 
 const CollectionComponent: React.FC = () => {
   const router = useRouter();
   const { slug } = router.query;
-  const [collection, setCollection] = useState<Piece>();
-
-  useEffect(() => {
-    const getData = async () => {
-      if (typeof slug === 'string') {
-        const collection = await getPieceBySlug(slug);
-        setCollection(collection);
-      }
-    };
-    getData();
-  }, [slug]);
+  const { data: piece, error } = useSWR(`/piece/slug/${slug}`, APIService.getData);
 
   return (
     <Layout>
-      {collection && (
+      {!piece && <Loading />}
+      {piece && (
         <>
-          <PieceHeader piece={collection} />
+          <PieceHeader piece={piece} />
         </>
       )}
     </Layout>
