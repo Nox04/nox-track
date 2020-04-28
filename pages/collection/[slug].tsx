@@ -7,8 +7,4 @@ const Collection: NextPage = () => {
   return <CollectionPage />;
 };
 
-Collection.getInitialProps = async ({ ...ctx }) => {
-  return {};
-};
-
 export default Collection;
