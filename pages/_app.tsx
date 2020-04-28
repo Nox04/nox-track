@@ -4,6 +4,7 @@ import '@src/css/tailwind.css';
 import Head from 'next/head';
 import { AuthContextProvider } from '@src/contexts/AuthContext';
 import { SITE_NAME } from '@src/shared/constants';
+import 'typeface-roboto';
 
 class MyApp extends ParentApp {
   render() {

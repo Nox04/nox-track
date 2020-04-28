@@ -19,10 +19,6 @@ class MyDocument extends Document {
           <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
           <meta name="msapplication-TileColor" content="#34495f" />
           <meta name="description" content="Track your collections" />
-          <link
-            href="https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap"
-            rel="stylesheet"
-          />
         </Head>
         <body className="bg-gray-900">
           <Main />
