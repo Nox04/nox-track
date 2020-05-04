@@ -1,15 +1,25 @@
 import React from 'react';
-import { Collection } from '@src/types';
+import { Collection, Piece } from '@src/types';
 import useWindowWidth from '@src/hooks/useWindowWidth';
 import Rating from '@src/components/Rating';
+import { ProgressStatus } from '@src/services/piece.service';
 
 interface CollectionHeaderProps {
   collection: Collection;
+  pieces: Piece[];
 }
 const CollectionHeader: React.FC<CollectionHeaderProps> = ({
   collection,
+  pieces,
 }: CollectionHeaderProps) => {
   const width = useWindowWidth();
+  let minutesExpended = 0;
+  pieces.forEach((piece) => {
+    if (piece.progress?.status === ProgressStatus.FINISHED) {
+      minutesExpended += piece.minutes;
+    }
+  });
+  const progressPercentage = Math.round((minutesExpended * 100) / collection.minutes);
   return (
     <div className="rounded-lg my-6 mx-6 lg:mx-auto p-4 bg-gray-700 sm:flex text-white lg:w-11/12 xl:w-3/4">
       <div
@@ -38,20 +48,14 @@ const CollectionHeader: React.FC<CollectionHeaderProps> = ({
             <div className="shadow w-full bg-white mt-2">
               <div
                 className="bg-purple-700 text-xs leading-none py-1 text-center text-white"
-                style={{ width: '45%' }}
+                style={{ width: `${progressPercentage}%` }}
               >
-                45%
+                {progressPercentage}%
               </div>
             </div>
           </div>
         </div>
-        <div className="flex p-4">
-          Stephen Edwin King (born September 21, 1947) is an American author of horror, supernatural
-          fiction, suspense, and fantasy novels. His books have sold more than 350 million copies,
-          many of which have been adapted into films, television series, miniseries, and comic
-          books. He has published 61 novels, including seven under the pen name Richard Bachman, and
-          six non-fiction books.
-        </div>
+        <div className="flex p-4">{collection.description}</div>
       </div>
     </div>
   );

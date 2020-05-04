@@ -1,7 +1,19 @@
+import { PieceType, ProgressStatus } from '@src/services/piece.service';
+
 export interface User {
+  id: string;
   email: string;
   name: string;
   picture: string;
+}
+
+export interface UserPieceRelationship extends BaseEntity {
+  rating: number;
+  comment: string;
+  status: ProgressStatus;
+  userId: string;
+  pieceId: string;
+  finishedTime: Date;
 }
 
 export interface Collection extends BaseEntity {
@@ -13,7 +25,9 @@ export interface Collection extends BaseEntity {
   minutes: number;
   booksCount: number;
   moviesCount: number;
+  description: string;
 }
+
 export interface BaseEntity {
   id: string;
   createdTime: Date;
@@ -26,4 +40,5 @@ export interface Piece extends BaseEntity {
   slug: string;
   minutes: number;
   type: PieceType;
+  progress?: UserPieceRelationship;
 }
