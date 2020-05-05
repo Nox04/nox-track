@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import { Piece } from '@src/types';
 import useWindowWidth from '@src/hooks/useWindowWidth';
@@ -6,6 +6,7 @@ import { ProgressStatus, ratePiece } from '@src/services/piece.service';
 import Rating from '@src/components/Rating/index';
 import { AuthStatus, useAuthContext } from '@src/contexts/AuthContext';
 import debounce from 'lodash/debounce';
+import FloatingForm from '@src/components/CollectionSection/FloatingForm';
 
 interface PieceCardProps {
   piece: Piece;
@@ -15,6 +16,7 @@ interface PieceCardProps {
 const PieceCard: React.FC<PieceCardProps> = ({ piece, onUpdateCard }: PieceCardProps) => {
   const width = useWindowWidth();
   const { authStatus } = useAuthContext();
+  const [state, setState] = useState('idle');
 
   const ribbonColor = (status: string) => {
     switch (status) {
@@ -27,13 +29,18 @@ const PieceCard: React.FC<PieceCardProps> = ({ piece, onUpdateCard }: PieceCardP
     }
   };
 
-  const delayedQuery = debounce(async (id, rating) => {
+  const delayedRequest = debounce(async (id, rating) => {
     await ratePiece(id, rating);
     onUpdateCard();
   }, 500);
 
   const updateRating = async (id: string, rating: number) => {
-    delayedQuery(id, rating);
+    delayedRequest(id, rating);
+  };
+
+  const onUpdatedProgress = async () => {
+    setState('idle');
+    onUpdateCard();
   };
 
   return (
@@ -66,7 +73,10 @@ const PieceCard: React.FC<PieceCardProps> = ({ piece, onUpdateCard }: PieceCardP
           </Link>
           {authStatus === AuthStatus.LOGGED_IN && (
             <div className="flex justify-around w-full py-1">
-              <button className="bg-transparent hover:bg-purple-500 text-white px-1 border border-purple-500 hover:border-transparent rounded">
+              <button
+                className="bg-transparent hover:bg-purple-500 text-white px-1 border border-purple-500 hover:border-transparent rounded"
+                onClick={() => setState('editing')}
+              >
                 Update Progress
               </button>
               <Rating
@@ -77,6 +87,14 @@ const PieceCard: React.FC<PieceCardProps> = ({ piece, onUpdateCard }: PieceCardP
             </div>
           )}
         </header>
+        {state === 'editing' && (
+          <FloatingForm
+            piece={piece}
+            previousStatus={piece.progress}
+            onCancel={() => setState('idle')}
+            onSuccess={onUpdatedProgress}
+          />
+        )}
       </article>
     </div>
   );
