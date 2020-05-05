@@ -2,9 +2,9 @@ import { PieceType, ProgressStatus } from '@src/services/piece.service';
 
 export interface User {
   id: string;
-  email: string;
-  name: string;
-  picture: string;
+  email?: string;
+  name?: string;
+  picture?: string;
 }
 
 export interface UserPieceRelationship extends BaseEntity {

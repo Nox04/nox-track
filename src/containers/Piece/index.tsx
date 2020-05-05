@@ -9,7 +9,7 @@ import Loading from '@src/components/Loading';
 const CollectionComponent: React.FC = () => {
   const router = useRouter();
   const { slug } = router.query;
-  const { data: piece, error } = useSWR(`/piece/slug/${slug}`, APIService.getData);
+  const { data: piece, error } = useSWR(slug ? `/piece/slug/${slug}` : null, APIService.getData);
 
   return (
     <Layout>

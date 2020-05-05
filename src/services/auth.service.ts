@@ -36,6 +36,17 @@ export const hasValidSession = () => {
   return false;
 };
 
+export const getInitialUserId = () => {
+  if (process.browser) {
+    const token = getSessionValue() || '';
+    if (validToken(token)) {
+      const jwtInfo: any = decodeJwt(token);
+      return jwtInfo.id;
+    }
+  }
+  return '';
+};
+
 export const clearSession = () => {
   clearLocalValue(SESSION_KEY);
 };
