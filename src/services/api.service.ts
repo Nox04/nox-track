@@ -43,6 +43,6 @@ export class APIService {
   }
 
   static async updateData(url: string, params?: object): Promise<any> {
-    return await api.put(url, { ...params });
+    return await api.patch(url, { ...params });
   }
 }
