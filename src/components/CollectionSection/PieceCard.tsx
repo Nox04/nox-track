@@ -53,7 +53,14 @@ const PieceCard: React.FC<PieceCardProps> = ({ piece }: PieceCardProps) => {
               {piece.name}
             </a>
           </Link>
-          <Rating value={piece.progress?.rating} edit={authStatus === AuthStatus.LOGGED_IN} />
+          {authStatus === AuthStatus.LOGGED_IN && (
+            <div className="flex justify-around w-full py-1">
+              <button className="bg-transparent hover:bg-purple-500 text-white px-1 border border-purple-500 hover:border-transparent rounded">
+                Update Progress
+              </button>
+              <Rating value={piece.progress?.rating} edit={authStatus === AuthStatus.LOGGED_IN} />
+            </div>
+          )}
         </header>
       </article>
     </div>
