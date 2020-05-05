@@ -5,6 +5,7 @@ import useWindowWidth from '@src/hooks/useWindowWidth';
 import { ProgressStatus, ratePiece } from '@src/services/piece.service';
 import Rating from '@src/components/Rating/index';
 import { AuthStatus, useAuthContext } from '@src/contexts/AuthContext';
+import debounce from 'lodash/debounce';
 
 interface PieceCardProps {
   piece: Piece;
@@ -26,9 +27,13 @@ const PieceCard: React.FC<PieceCardProps> = ({ piece, onUpdateCard }: PieceCardP
     }
   };
 
-  const updateRating = async (id: string, rating: number) => {
+  const delayedQuery = debounce(async (id, rating) => {
     await ratePiece(id, rating);
     onUpdateCard();
+  }, 500);
+
+  const updateRating = async (id: string, rating: number) => {
+    delayedQuery(id, rating);
   };
 
   return (
