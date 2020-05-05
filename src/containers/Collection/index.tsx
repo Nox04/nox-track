@@ -3,7 +3,7 @@ import Layout from '@src/components/layout';
 import { useRouter } from 'next/router';
 import CollectionHeader from '@src/components/CollectionSection/Header';
 import PieceCollection from '@src/components/CollectionSection/PieceCollection';
-import useSWR from 'swr';
+import useSWR, { mutate } from 'swr';
 import { APIService } from '@src/services/api.service';
 import Loading from '@src/components/Loading';
 import { useAuthContext } from '@src/contexts/AuthContext';
@@ -34,6 +34,10 @@ const CollectionComponent: React.FC = () => {
     }
   }, [userData]);
 
+  const validateData = async () => {
+    await mutate(slug ? `/user/${userId}/collection-status/${slug}` : null);
+  };
+
   useEffect(() => {
     const cloned = cloneDeep(collection);
     if (cloned) {
@@ -54,7 +58,7 @@ const CollectionComponent: React.FC = () => {
       {collection && (
         <>
           <CollectionHeader collection={collection} pieces={pieces} />
-          <PieceCollection pieces={pieces} />
+          <PieceCollection pieces={pieces} onUpdateCard={validateData} />
         </>
       )}
     </Layout>

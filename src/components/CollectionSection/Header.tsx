@@ -25,10 +25,13 @@ const CollectionHeader: React.FC<CollectionHeaderProps> = ({
       let validPiecesCount = 0;
 
       pieces.forEach((piece) => {
-        if (piece.progress?.status === ProgressStatus.FINISHED) {
+        if (
+          piece.progress?.status === ProgressStatus.FINISHED ||
+          piece.progress?.status === ProgressStatus.IN_PROGRESS
+        ) {
           count += piece.minutes;
           rating += piece.progress.rating;
-          validPiecesCount++;
+          if (piece.progress.rating !== 0) validPiecesCount++;
         }
       });
       setMinutesExpended(count);

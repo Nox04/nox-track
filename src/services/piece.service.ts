@@ -11,6 +11,6 @@ export enum ProgressStatus {
   FINISHED = 'finished',
 }
 
-export const getPieceBySlug = async (slug: string) => {
-  return await APIService.getData(`/piece/slug/${slug}`);
+export const ratePiece = async (id: string, rating: number) => {
+  return await APIService.updateData(`/piece/${id}/rate`, { rating: rating.toString() });
 };

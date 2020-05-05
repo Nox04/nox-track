@@ -2,15 +2,16 @@ import React from 'react';
 import Link from 'next/link';
 import { Piece } from '@src/types';
 import useWindowWidth from '@src/hooks/useWindowWidth';
-import { ProgressStatus } from '@src/services/piece.service';
+import { ProgressStatus, ratePiece } from '@src/services/piece.service';
 import Rating from '@src/components/Rating/index';
 import { AuthStatus, useAuthContext } from '@src/contexts/AuthContext';
 
 interface PieceCardProps {
   piece: Piece;
+  onUpdateCard: () => {};
 }
 
-const PieceCard: React.FC<PieceCardProps> = ({ piece }: PieceCardProps) => {
+const PieceCard: React.FC<PieceCardProps> = ({ piece, onUpdateCard }: PieceCardProps) => {
   const width = useWindowWidth();
   const { authStatus } = useAuthContext();
 
@@ -23,6 +24,11 @@ const PieceCard: React.FC<PieceCardProps> = ({ piece }: PieceCardProps) => {
       default:
         return 'bg-blue-700';
     }
+  };
+
+  const updateRating = async (id: string, rating: number) => {
+    await ratePiece(id, rating);
+    onUpdateCard();
   };
 
   return (
@@ -58,7 +64,11 @@ const PieceCard: React.FC<PieceCardProps> = ({ piece }: PieceCardProps) => {
               <button className="bg-transparent hover:bg-purple-500 text-white px-1 border border-purple-500 hover:border-transparent rounded">
                 Update Progress
               </button>
-              <Rating value={piece.progress?.rating} edit={authStatus === AuthStatus.LOGGED_IN} />
+              <Rating
+                value={piece.progress?.rating}
+                edit={authStatus === AuthStatus.LOGGED_IN}
+                onChange={(rating: number) => updateRating(piece.id, rating)}
+              />
             </div>
           )}
         </header>
