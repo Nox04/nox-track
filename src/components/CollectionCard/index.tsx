@@ -4,6 +4,7 @@ import { faBook, faFilm, faClock } from '@fortawesome/free-solid-svg-icons';
 import Link from 'next/link';
 import useWindowWidth from '@src/hooks/useWindowWidth';
 import { Collection } from '@src/types';
+import { minutesToHours } from '@src/utils/time';
 
 interface CollectionCardProps {
   collection: Collection;
@@ -44,7 +45,7 @@ const CollectionCard: React.FC<CollectionCardProps> = ({ collection }: Collectio
             <span>
               <FontAwesomeIcon icon={faClock} className="text-yellow-400" />
               <span className="text-center text-white pl-2">
-                {(collection.minutes / 60).toFixed(1)}
+                {minutesToHours(collection.minutes)}
               </span>
             </span>
           </div>

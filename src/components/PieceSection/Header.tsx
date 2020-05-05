@@ -1,6 +1,7 @@
 import React from 'react';
 import { Piece } from '@src/types';
 import useWindowWidth from '@src/hooks/useWindowWidth';
+import { minutesToHours } from '@src/utils/time';
 
 interface PieceHeaderProps {
   piece: Piece;
@@ -19,7 +20,7 @@ const PieceHeader: React.FC<PieceHeaderProps> = ({ piece }: PieceHeaderProps) =>
       />
       <div className="flex px-4 flex-col">
         <h2 className="text-4xl font-medium text-center sm:text-left">{piece.name}</h2>
-        <h2 className="text-xl">Approximated time: {(piece.minutes / 60).toFixed(1)} hours</h2>
+        <h2 className="text-xl">Approximated time: {minutesToHours(piece.minutes)} hours</h2>
       </div>
     </div>
   );
