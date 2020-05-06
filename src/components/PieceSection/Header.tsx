@@ -95,7 +95,7 @@ const PieceHeader: React.FC<PieceHeaderProps> = ({ piece, onUpdate }: PieceHeade
           <div
             className="relative h-full sm:mx-4"
             style={{
-              minHeight: 350,
+              minHeight: 400,
             }}
           >
             <FloatingForm
