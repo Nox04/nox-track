@@ -47,7 +47,9 @@ const PieceHeader: React.FC<PieceHeaderProps> = ({ piece, onUpdate }: PieceHeade
         <div className="flex flex-grow flex-col">
           <div className="flex flex-col md:flex-row">
             <div className="flex px-4 flex-col flex-grow">
-              <h2 className="text-4xl font-medium text-center sm:text-left">{piece.name}</h2>
+              <h2 className="text-4xl font-medium text-center sm:text-left">
+                {piece.name} ({piece.year})
+              </h2>
               <div className="inline-flex">
                 <h2 className="text-lg">My Rating: </h2>
                 <Rating value={piece.progress?.rating || 0} edit={false} />
