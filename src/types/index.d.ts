@@ -41,6 +41,7 @@ export interface Piece extends BaseEntity {
   slug: string;
   minutes: number;
   type: PieceType;
+  year: number;
   progress?: UserPieceRelationship;
   description?: string;
   userToPieces?: UserPieceRelationship[];
