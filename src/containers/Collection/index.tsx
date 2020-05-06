@@ -11,6 +11,7 @@ import { Piece, UserPieceRelationship } from '@src/types';
 import cloneDeep from 'lodash/cloneDeep';
 import { getPiecesFromCollection } from '@src/utils/collections';
 import { getInitialUserId } from '@src/services/auth.service';
+import { PieceType } from '@src/services/piece.service';
 
 const CollectionComponent: React.FC = () => {
   const router = useRouter();
@@ -58,7 +59,8 @@ const CollectionComponent: React.FC = () => {
       {collection && (
         <>
           <CollectionHeader collection={collection} pieces={pieces} />
-          <PieceCollection pieces={pieces} onUpdateCard={validateData} />
+          <PieceCollection pieces={pieces} onUpdateCard={validateData} type={PieceType.BOOK} />
+          <PieceCollection pieces={pieces} onUpdateCard={validateData} type={PieceType.MOVIE} />
         </>
       )}
     </Layout>
