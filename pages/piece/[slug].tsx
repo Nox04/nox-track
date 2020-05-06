@@ -6,8 +6,4 @@ const Piece: NextPage = () => {
   return <PiecePage />;
 };
 
-Piece.getInitialProps = async ({ ...ctx }) => {
-  return {};
-};
-
 export default Piece;

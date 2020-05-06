@@ -6,7 +6,7 @@ import { ProgressStatus, ratePiece } from '@src/services/piece.service';
 import Rating from '@src/components/Rating/index';
 import { AuthStatus, useAuthContext } from '@src/contexts/AuthContext';
 import debounce from 'lodash/debounce';
-import FloatingForm from '@src/components/CollectionSection/FloatingForm';
+import FloatingForm, {DisplayMode} from '@src/components/CollectionSection/FloatingForm';
 
 interface PieceCardProps {
   piece: Piece;
@@ -93,6 +93,7 @@ const PieceCard: React.FC<PieceCardProps> = ({ piece, onUpdateCard }: PieceCardP
             previousStatus={piece.progress}
             onCancel={() => setState('idle')}
             onSuccess={onUpdatedProgress}
+            mode={DisplayMode.CARD}
           />
         )}
       </article>

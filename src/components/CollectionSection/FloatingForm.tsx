@@ -3,11 +3,17 @@ import Rating from '@src/components/Rating/index';
 import { Piece, UserPieceRelationship } from '@src/types';
 import { ProgressStatus, updateProgressOnPiece } from '@src/services/piece.service';
 
+export enum DisplayMode {
+  CARD,
+  SECTION,
+}
+
 interface FloatingFormProps {
   piece: Piece;
   onSuccess: () => void;
   onCancel: () => void;
   previousStatus?: UserPieceRelationship;
+  mode: DisplayMode;
 }
 
 const FloatingForm: React.FC<FloatingFormProps> = ({
@@ -15,6 +21,7 @@ const FloatingForm: React.FC<FloatingFormProps> = ({
   onCancel,
   onSuccess,
   previousStatus,
+  mode,
 }: FloatingFormProps) => {
   const [rating, setRating] = useState(0);
   const [finishedTime, setFinishedTime] = useState(new Date().toISOString().split('T')[0]);
@@ -44,7 +51,7 @@ const FloatingForm: React.FC<FloatingFormProps> = ({
   };
 
   return (
-    <div className="absolute bg-gray-900 w-full h-full bottom-0 z-10 p-4">
+    <div className="absolute bg-gray-900 w-full h-full top-0 z-10 p-4 rounded">
       <h2 className="text-xl truncate text-center font-medium py-1">{piece.name}</h2>
       <div className="inline-block relative w-full py-1">
         <select
