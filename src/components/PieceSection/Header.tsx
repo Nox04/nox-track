@@ -6,6 +6,7 @@ import Rating from '@src/components/Rating';
 import SignInMessage from '@src/components/SignInMessage';
 import FloatingForm, { DisplayMode } from '@src/components/CollectionSection/FloatingForm';
 import { AuthStatus, useAuthContext } from '@src/contexts/AuthContext';
+import { ProgressStatus } from '@src/services/piece.service';
 
 interface PieceHeaderProps {
   piece: Piece;
@@ -15,6 +16,22 @@ const PieceHeader: React.FC<PieceHeaderProps> = ({ piece, onUpdate }: PieceHeade
   const width = useWindowWidth();
   const [state, setState] = useState('idle');
   const { authStatus } = useAuthContext();
+
+  const ribbonColor = (status: string) => {
+    switch (status) {
+      case ProgressStatus.IN_PROGRESS:
+        return 'bg-purple-700';
+      case ProgressStatus.FINISHED:
+        return 'bg-green-700';
+      default:
+        return 'bg-blue-700';
+    }
+  };
+
+  const onSavedProgress = () => {
+    setState('idle');
+    onUpdate();
+  };
 
   return (
     <div className="rounded-lg my-6 mx-6 lg:mx-auto p-4 bg-gray-700 sm:flex text-white lg:w-11/12 xl:w-3/4">
@@ -33,7 +50,7 @@ const PieceHeader: React.FC<PieceHeaderProps> = ({ piece, onUpdate }: PieceHeade
               <h2 className="text-4xl font-medium text-center sm:text-left">{piece.name}</h2>
               <div className="inline-flex">
                 <h2 className="text-lg">My Rating: </h2>
-                <Rating value={1} edit={false} />
+                <Rating value={piece.progress?.rating || 0} edit={false} />
               </div>
               <div className="mt-2">
                 <h2 className="text-xl">
@@ -42,7 +59,22 @@ const PieceHeader: React.FC<PieceHeaderProps> = ({ piece, onUpdate }: PieceHeade
               </div>
             </div>
           </div>
-          <div className="flex p-4">{piece.description}</div>
+          {piece.description && <div className="flex p-4">{piece.description}</div>}
+          {piece.progress?.finishedTime && (
+            <div className="flex p-4">
+              Finished: {piece.progress.finishedTime.toString().split('T')[0]}
+            </div>
+          )}
+          <div className="relative p-4">
+            <span
+              className={`${ribbonColor(
+                piece.progress?.status || 'Pending',
+              )} px-8 py-2 ribbon capitalize shadow-x truncate rounded`}
+            >
+              {piece.progress?.status || 'Pending'}
+            </span>
+          </div>
+
           <SignInMessage message="If you want to track your progress on this collection, Sign in first." />
           {authStatus === AuthStatus.LOGGED_IN && (
             <div className="relative p-4">
@@ -63,7 +95,7 @@ const PieceHeader: React.FC<PieceHeaderProps> = ({ piece, onUpdate }: PieceHeade
               piece={piece}
               previousStatus={piece.progress}
               onCancel={() => setState('idle')}
-              onSuccess={onUpdate}
+              onSuccess={onSavedProgress}
               mode={DisplayMode.SECTION}
             />
           </div>

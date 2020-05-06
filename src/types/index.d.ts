@@ -14,6 +14,7 @@ export interface UserPieceRelationship extends BaseEntity {
   userId: string;
   pieceId: string;
   finishedTime: Date;
+  user?: User;
 }
 
 export interface Collection extends BaseEntity {
@@ -42,4 +43,5 @@ export interface Piece extends BaseEntity {
   type: PieceType;
   progress?: UserPieceRelationship;
   description?: string;
+  userToPieces?: UserPieceRelationship[];
 }
