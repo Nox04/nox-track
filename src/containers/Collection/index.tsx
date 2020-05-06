@@ -12,6 +12,7 @@ import cloneDeep from 'lodash/cloneDeep';
 import { getPiecesFromCollection } from '@src/utils/collections';
 import { getInitialUserId } from '@src/services/auth.service';
 import { PieceType } from '@src/services/piece.service';
+import { clone } from '@babel/types';
 
 const CollectionComponent: React.FC = () => {
   const router = useRouter();
@@ -49,10 +50,10 @@ const CollectionComponent: React.FC = () => {
         return { ...piece, progress: pieceProgress };
       });
 
-      // mappedPieces.sort((a, b) => {
-      //   return a.year - b.year;
-      // });
-      setPieces(mappedPieces);
+      mappedPieces.sort((a, b) => {
+        return a.year - b.year;
+      });
+      setPieces(cloneDeep(mappedPieces));
     }
   }, [collection, progress]);
 
