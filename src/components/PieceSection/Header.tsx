@@ -90,7 +90,12 @@ const PieceHeader: React.FC<PieceHeaderProps> = ({ piece, onUpdate }: PieceHeade
       )}
       {state === 'editing' && (
         <div className="flex flex-grow flex-col">
-          <div className="relative h-full mx-4">
+          <div
+            className="relative h-full sm:mx-4"
+            style={{
+              minHeight: 350,
+            }}
+          >
             <FloatingForm
               piece={piece}
               previousStatus={piece.progress}

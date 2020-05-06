@@ -6,7 +6,7 @@ import useSWR, { mutate } from 'swr';
 import { APIService } from '@src/services/api.service';
 import Loading from '@src/components/Loading';
 import { Piece } from '@src/types';
-import PieceComments from "@src/components/PieceSection/PieceComments";
+import PieceComments from '@src/components/PieceSection/PieceComments';
 
 const CollectionComponent: React.FC = () => {
   const router = useRouter();
