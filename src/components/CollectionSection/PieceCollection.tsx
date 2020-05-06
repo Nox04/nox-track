@@ -45,11 +45,9 @@ const PieceCollection: React.FC<PieceCollectionProps> = ({
         <SectionTitle type={type} />
         {pieces?.map((piece, index) => {
           return (
-            <>
-              {piece.type === type && (
-                <PieceCard piece={piece} key={index} onUpdateCard={onUpdateCard} />
-              )}
-            </>
+            <React.Fragment key={index}>
+              {piece.type === type && <PieceCard piece={piece} onUpdateCard={onUpdateCard} />}
+            </React.Fragment>
           );
         })}
       </div>

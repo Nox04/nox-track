@@ -63,8 +63,18 @@ const CollectionComponent: React.FC = () => {
       {collection && (
         <>
           <CollectionHeader collection={collection} pieces={pieces} />
-          <PieceCollection pieces={pieces} onUpdateCard={validateData} type={PieceType.BOOK} />
-          <PieceCollection pieces={pieces} onUpdateCard={validateData} type={PieceType.MOVIE} />
+          <PieceCollection
+            key={1}
+            pieces={pieces}
+            onUpdateCard={validateData}
+            type={PieceType.BOOK}
+          />
+          <PieceCollection
+            key={2}
+            pieces={pieces}
+            onUpdateCard={validateData}
+            type={PieceType.MOVIE}
+          />
         </>
       )}
     </Layout>
