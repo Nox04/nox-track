@@ -10,6 +10,9 @@ class MyDocument extends Document {
     return (
       <Html lang="en">
         <Head>
+          <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+          <meta name="keywords" content="Keywords" />
+          <link rel="manifest" href="/manifest.json" />
           <meta charSet="utf-8" />
           <meta name="theme-color" content="#2d3748" />
           <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
