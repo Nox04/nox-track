@@ -49,9 +49,9 @@ const CollectionComponent: React.FC = () => {
         return { ...piece, progress: pieceProgress };
       });
 
-      mappedPieces.sort((a, b) => {
-        return a.year - b.year;
-      });
+      // mappedPieces.sort((a, b) => {
+      //   return a.year - b.year;
+      // });
       setPieces(mappedPieces);
     }
   }, [collection, progress]);
