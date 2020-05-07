@@ -42,6 +42,7 @@ export interface Piece extends BaseEntity {
   minutes: number;
   type: PieceType;
   year: number;
+  rating: number;
   progress?: UserPieceRelationship;
   description?: string;
   userToPieces?: UserPieceRelationship[];

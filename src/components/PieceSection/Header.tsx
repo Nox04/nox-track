@@ -50,10 +50,7 @@ const PieceHeader: React.FC<PieceHeaderProps> = ({ piece, onUpdate }: PieceHeade
               <h2 className="text-4xl font-medium text-center sm:text-left">
                 {piece.name} ({piece.year})
               </h2>
-              <div className="inline-flex">
-                <h2 className="text-lg">My Rating: </h2>
-                <Rating value={piece.progress?.rating || 0} edit={false} />
-              </div>
+              <Rating value={piece.rating || 0} edit={false} />
               <div className="mt-2">
                 <h2 className="text-xl">
                   Approximated time: {minutesToHours(piece.minutes)} hours
@@ -62,6 +59,12 @@ const PieceHeader: React.FC<PieceHeaderProps> = ({ piece, onUpdate }: PieceHeade
             </div>
           </div>
           {piece.description && <div className="flex p-4">{piece.description}</div>}
+          <div className="flex px-4">
+            <div className="inline-flex mr-2">
+              <h2 className="text-lg">My Rating: </h2>
+            </div>
+            <Rating value={piece.progress?.rating || 0} edit={false} />
+          </div>
           {piece.progress?.finishedTime && (
             <div className="flex p-4">
               Finished: {piece.progress.finishedTime.toString().split('T')[0]}
