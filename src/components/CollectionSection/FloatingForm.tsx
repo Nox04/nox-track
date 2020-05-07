@@ -41,7 +41,6 @@ const FloatingForm: React.FC<FloatingFormProps> = ({
   }, [previousStatus]);
 
   const sendForm = async () => {
-    console.log(finishedTime);
     await updateProgressOnPiece(piece.id, {
       comment,
       rating: rating.toString(),
