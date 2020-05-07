@@ -10,7 +10,7 @@ const Login: React.FC = () => {
 
   useEffect(() => {
     if (authStatus === AuthStatus.LOGGED_IN) {
-      router.push('/profile');
+      router.push('/');
     }
   }, [authStatus, router]);
 

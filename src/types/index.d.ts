@@ -5,6 +5,7 @@ export interface User {
   email?: string;
   name?: string;
   picture?: string;
+  createdTime: string;
 }
 
 export interface UserPieceRelationship extends BaseEntity {

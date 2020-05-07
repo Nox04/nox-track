@@ -12,7 +12,6 @@ import cloneDeep from 'lodash/cloneDeep';
 import { getPiecesFromCollection } from '@src/utils/collections';
 import { getInitialUserId } from '@src/services/auth.service';
 import { PieceType } from '@src/services/piece.service';
-import { clone } from '@babel/types';
 
 const CollectionComponent: React.FC = () => {
   const router = useRouter();

@@ -8,18 +8,18 @@ enum MenuState {
 }
 
 const Header: React.FC = () => {
-  const { authStatus } = useAuthContext();
+  const { authStatus, userData } = useAuthContext();
   const [state, setState] = useState<MenuState>(MenuState.COLLAPSED);
 
   const MenuItems = () => {
     return (
       <>
         <Link
-          href={authStatus === AuthStatus.LOGGED_IN ? '/profile' : '/login'}
-          as={authStatus === AuthStatus.LOGGED_IN ? '/profile' : '/login'}
+          href={authStatus === AuthStatus.LOGGED_IN ? '/user/[id]' : '/login'}
+          as={authStatus === AuthStatus.LOGGED_IN ? `/user/${userData?.id}` : '/login'}
         >
           <li className="p-4 hover:bg-gray-700 leading-10 h-full w-full">
-            <a href={authStatus === AuthStatus.LOGGED_IN ? '/profile' : '/login'}>
+            <a href={authStatus === AuthStatus.LOGGED_IN ? `/user/${userData?.id}` : '/login'}>
               {authStatus === AuthStatus.LOGGED_IN ? 'Profile' : 'Login'}
             </a>
           </li>

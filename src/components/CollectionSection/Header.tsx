@@ -36,7 +36,7 @@ const CollectionHeader: React.FC<CollectionHeaderProps> = ({
     }
   }, [pieces]);
 
-  const progressPercentage = Math.round((minutesExpended * 100) / collection.minutes);
+  const progressPercentage = Math.round((minutesExpended * 100) / collection.minutes) || 0;
   return (
     <div className="rounded-lg my-6 mx-6 lg:mx-auto p-4 bg-gray-700 sm:flex text-white lg:w-11/12 xl:w-3/4">
       <div
