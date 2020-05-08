@@ -27,3 +27,5 @@ yarn-error.log*
 # Environment Variables
 .env
 .idea
+public/sw.js
+public/sw.js.map
